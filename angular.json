@@ -62,7 +62,8 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "ui-default:build"
+            "browserTarget": "ui-default:build",
+            "proxyConfig": "apps/ui-default/proxy.conf.json"
           },
           "configurations": {
             "production": {
@@ -120,6 +121,87 @@
           "options": {
             "tsConfig": ["apps/ui-default-e2e/tsconfig.e2e.json"],
             "exclude": ["**/node_modules/**", "!apps/ui-default-e2e/**/*"]
+          }
+        }
+      }
+    },
+    "api-default": {
+      "root": "apps/api-default",
+      "sourceRoot": "apps/api-default/src",
+      "projectType": "application",
+      "prefix": "api-default",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "options": {
+            "outputPath": "dist/apps/api-default",
+            "main": "apps/api-default/src/main.ts",
+            "tsConfig": "apps/api-default/tsconfig.app.json",
+            "assets": ["apps/api-default/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/api-default/src/environments/environment.ts",
+                  "with": "apps/api-default/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "api-default:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/api-default/tsconfig.app.json",
+              "apps/api-default/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/api-default/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/api-default/jest.config.js",
+            "tsConfig": "apps/api-default/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "data": {
+      "root": "libs/data",
+      "sourceRoot": "libs/data/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/data/tsconfig.lib.json",
+              "libs/data/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/data/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/data/jest.config.js",
+            "tsConfig": "libs/data/tsconfig.spec.json",
+            "passWithNoTests": true
           }
         }
       }

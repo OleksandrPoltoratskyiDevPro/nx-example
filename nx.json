@@ -25,6 +25,12 @@
     "ui-default-e2e": {
       "tags": [],
       "implicitDependencies": ["ui-default"]
+    },
+    "api-default": {
+      "tags": []
+    },
+    "data": {
+      "tags": []
     }
   }
 }
