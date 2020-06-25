@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
-import { Todo } from '@wp-default/data';
+import {SomeSharedClass, Todo} from '@wp-default/data';
 
 @Component({
   selector: 'wp-default-root',
@@ -16,6 +16,9 @@ export class AppComponent {
 
   fetch() {
     this.http.get<Todo[]>('/api/todos').subscribe((t) => (this.todos = t));
+
+    const sharedClassInstance = new SomeSharedClass('I`m a frontend shared instance');
+    console.log('shared class UI', sharedClassInstance);
   }
 
   addTodo() {
