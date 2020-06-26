@@ -15,7 +15,7 @@ describe('AppService', () => {
 
   describe('getData', () => {
     it('should return "Welcome to api-default!"', () => {
-      expect(service.getData()).toEqual({ message: 'Welcome to api-default!' });
+      expect(service.getData()).toEqual([{title: 'Todo 1 changed haha'}, {title: 'Todo 2'}]);
     });
   });
 });

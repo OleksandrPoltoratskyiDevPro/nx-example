@@ -26,7 +26,8 @@
     "workspace-schematic": "nx workspace-schematic",
     "dep-graph": "nx dep-graph",
     "help": "nx help",
-    "run-all": "nx run-many --target=serve --all --parallel --maxParallel=8"
+    "run-all": "nx run-many --target=serve --all --parallel --maxParallel=8",
+    "test-all": "nx run-many --target=test --all --parallel --maxParallel=8"
   },
   "private": true,
   "dependencies": {
