@@ -205,6 +205,61 @@
           }
         }
       }
+    },
+    "api-second": {
+      "root": "apps/api-second",
+      "sourceRoot": "apps/api-second/src",
+      "projectType": "application",
+      "prefix": "api-second",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "options": {
+            "outputPath": "dist/apps/api-second",
+            "main": "apps/api-second/src/main.ts",
+            "tsConfig": "apps/api-second/tsconfig.app.json",
+            "assets": ["apps/api-second/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/api-second/src/environments/environment.ts",
+                  "with": "apps/api-second/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "api-second:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/api-second/tsconfig.app.json",
+              "apps/api-second/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/api-second/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/api-second/jest.config.js",
+            "tsConfig": "apps/api-second/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   },
   "cli": {

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
-import {SomeSharedClass, Todo} from '@wp-default/data';
+import { Todo } from '@wp-default/data';
 
 @Component({
   selector: 'wp-default-root',
@@ -8,17 +8,17 @@ import {SomeSharedClass, Todo} from '@wp-default/data';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  todos: Array<Todo> = [{ title: 'Todo 1' }, { title: 'Todo 2' }];
+  todos: Array<Todo> = [{title: 'Todo 1'}, {title: 'Todo 2'}];
+  secondApiGreeting: object;
 
   constructor(private http: HttpClient) {
     this.fetch();
   }
 
   fetch() {
-    this.http.get<Todo[]>('/api/todos').subscribe((t) => (this.todos = t));
+    this.http.get<Todo[]>('/api/default/todos').subscribe((t) => (this.todos = t));
 
-    const sharedClassInstance = new SomeSharedClass('I`m a frontend shared instance');
-    console.log('shared class UI', sharedClassInstance);
+    this.http.get<object>('/api/second/data').subscribe((r) => (this.secondApiGreeting = r));
   }
 
   addTodo() {

@@ -1,7 +1,10 @@
-<h1>Todos</h1>
+<h1>Default API response:</h1>
 
 <ul>
   <li *ngFor="let t of todos" class="todo">{{ t.title }}</li>
 </ul>
 
 <button id="add-todo" (click)="addTodo()">Add Todo</button>
+
+<h1>Second API response:</h1>
+{{ secondApiGreeting | json }}

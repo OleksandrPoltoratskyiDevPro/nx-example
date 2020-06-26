@@ -1,6 +1,18 @@
 {
-  "/api": {
+  "/api/default/*": {
     "target": "http://localhost:3333",
-    "secure": false
+    "secure": false,
+    "logLevel": "debug",
+    "pathRewrite": {
+      "^/api/default": "/api"
+    }
+  },
+  "/api/second/*": {
+    "target": "http://localhost:3334",
+    "secure": false,
+    "logLevel": "debug",
+    "pathRewrite": {
+      "^/api/second": "/api"
+    }
   }
 }
